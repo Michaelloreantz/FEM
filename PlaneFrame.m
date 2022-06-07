@@ -134,10 +134,14 @@ for elnum=1:size(elemENL,1)
     colENL(index)=colENL(index)+colelemENL;
 end
 
+if isempty(P)==0 
 nforce=zeros(DOF*size(Node,1),1);
 for i=1:size(P,1)
-    index=DOF*P(i,1)-((DOF-1):-1:0);    %Indexing of each nodal loads
+    index=DOF*P(i,1)-((DOF-1):-1:0)     %Indexing of each nodal loads
     nforce(index)=P(i,2:DOF+1);         %Nodal load values for each DOF
+end
+else
+    nforce=zeros(DOF*size(Node,1),1);
 end
 force=colENL+nforce;                   %Net values of nodal loadings
 %% Stiffness Assembly (K)
